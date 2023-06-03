@@ -235,21 +235,21 @@ void Ingame::render() {
   // on game over
   if(!mAlive) {
     // notify user of game over
-    gC.fonts.ui.put("Game Over!", ar.pos({0.1, 0.1}), 0.05);
-    gC.fonts.ui.put("Score:", ar.pos({0.1, 0.2}), 0.05);
+    gC.fonts.ui.put("Game Over!", ar.pos({0.1, 0.1}));
+    gC.fonts.ui.put("Score:", ar.pos({0.1, 0.2}));
 
     render::color({0, 1, 0});
-    gC.fonts.num.put(score, ar.pos({0.2, 0.2}), 0.05);
+    gC.fonts.num.put(score, ar.pos({0.2, 0.2}));
 
     // the hints
     render::color();
-    gC.fonts.ui.put("Press ESCAPE to return to main menu.", ar.pos({0.1, 0.3}), 0.05);
-    gC.fonts.ui.put("Press SPACE to try again.", ar.pos({0.1, 0.35}), 0.05);
+    gC.fonts.ui.put("Press ESCAPE to return to main menu.", ar.pos({0.1, 0.3}));
+    gC.fonts.ui.put("Press SPACE to try again.", ar.pos({0.1, 0.35}));
   } else {
     // show score at top of screen
-    gC.fonts.ui.put("Score:", ar.pos({0.02, 0.01}), 0.05);
+    gC.fonts.ui.put("Score:", ar.pos({0.02, 0.01}));
     render::color({0, 1, 0});
-    gC.fonts.num.put(score, ar.pos({0.2, 0.01}), 0.05);
+    gC.fonts.num.put(score, ar.pos({0.2, 0.01}));
   }
 }
 

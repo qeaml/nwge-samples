@@ -11,10 +11,7 @@ bool Init::preload() {
   return true;
 }
 
-bool Init::init() {
-  initCommons();
-  return true;
-}
+bool Init::init() { return true; }
 
 bool Init::on(nwge::Event&) { return true; }
 

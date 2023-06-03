@@ -23,14 +23,6 @@ struct Commons {
   const nwge::render::AspectRatio &ar =
     nwge::render::keepAspectRatio(1, 1);
 
-  // Common textures
-  struct Tex {
-    // Unfortunately nwge does not provide us with a built-in blank texture, so
-    // we have to create one ourselves
-    nwge::render::Texture
-      blank;
-  } tex;
-
   // Common font
   struct Fonts {
     // Note: The fonts should be the last member of any structure, including the
@@ -50,7 +42,6 @@ extern Commons gC;
 
 // Functions related to the lifetime of gC
 void preloadCommons();
-void initCommons();
 
 // Minimal initialization state. The only purpose of this state is to call
 // preloadCommons() and initCommons(), then switch to the Title state.

@@ -68,7 +68,7 @@ void Credits::render() {
 
   // put the license text on screen, scrolled
   render::color();
-  gC.fonts.code.put(mCreditsCSTR, {0.02, -mScroll}, 0.05);
+  gC.fonts.code.put(mCreditsCSTR, {0.02, -mScroll});
 
   // put a background behind the hint
   render::color({0, 0, 0});
@@ -76,7 +76,7 @@ void Credits::render() {
 
   // the hint
   render::color();
-  gC.fonts.ui.put("Press ESCAPE to return.", {0.01, 0.94}, 0.05);
+  gC.fonts.ui.put("Press ESCAPE to return.", {0.01, 0.94});
 }
 
 Credits::~Credits() {}

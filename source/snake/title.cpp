@@ -106,13 +106,13 @@ void Title::render() {
   render::color();
   for(u32 i = 0; i < gOptCount; i++) {
     gC.fonts.ui.put(gOptNames[i],
-      ar.pos({BG_X+TEXT_OFF_X, OPT_Y + i*OPT_H + TEXT_OFF_Y}), 0.05);
+      ar.pos({BG_X+TEXT_OFF_X, OPT_Y + i*OPT_H + TEXT_OFF_Y}));
   }
 
   // little disclaimer at bottom left
   render::color();
   gC.fonts.ui.put("Powered by nwge!",
-    ar.pos({TEXT_OFF_X, 1-OPT_H-TEXT_OFF_Y}), 0.05);
+    ar.pos({TEXT_OFF_X, 1-OPT_H-TEXT_OFF_Y}));
 }
 
 Title::~Title() {}
