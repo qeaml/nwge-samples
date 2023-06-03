@@ -1,0 +1,59 @@
+---
+CompileFlags:
+  Add: [
+    -Wall,
+    -Wpedantic,
+    -Wextra,
+    -DDEBUG,
+  ]
+---
+If:
+  PathMatch: .*\.[ch]
+CompileFlags:
+  Add: [
+    -xc,
+    --std=c11,
+  ]
+---
+If:
+  PathMatch: .*\.[ch]pp
+CompileFlags:
+  Add: [
+    -xc++,
+    --std=c++20,
+  ]
+---
+If:
+  PathMatch: .*/.*.[ch](pp)?
+CompileFlags:
+  Add: [
+    -I../include,
+  ]
+---
+If:
+  PathMatch: .*/.*/.*\.[ch](pp)?
+CompileFlags:
+  Add: [
+    -I../../include,
+  ]
+---
+If:
+  PathMatch: .*/.*/.*/.*\.[ch](pp)?
+CompileFlags:
+  Add: [
+    -I../../../include,
+  ]
+---
+If:
+  PathMatch: .*/.*/.*/.*/.*\.[ch](pp)?
+CompileFlags:
+  Add: [
+    -I../../../../include,
+  ]
+---
+If:
+  PathMatch: .*/.*/.*/.*/.*/.*\.[ch](pp)?
+CompileFlags:
+  Add: [
+    -I../../../../../include,
+  ]

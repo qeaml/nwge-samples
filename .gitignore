@@ -1,0 +1,7 @@
+/target
+
+# bundled data - place the source files in data_src
+/data
+
+# python ugh
+__pycache__

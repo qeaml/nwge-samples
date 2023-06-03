@@ -1,0 +1,40 @@
+[build]
+cc = "clang"
+src = "source"
+incl = [
+  "include"
+]
+out = "target"
+obj = "target/build"
+
+[build.cpp]
+std = "c++20"
+
+[data_plugin]
+plug = "data_plugin"
+
+[paint]
+exe = "nwgepaint"
+libs = [
+  "nwge",
+  "SDL2",
+  "SDL2main",
+  "SDL2_image",
+  "Shell32"
+]
+link = [
+  "/subsystem:windows"
+]
+
+[snake]
+exe = "nwgesnake"
+libs = [
+  "nwge",
+  "SDL2",
+  "SDL2main",
+  "SDL2_image",
+  "Shell32"
+]
+link = [
+  "/subsystem:windows"
+]
