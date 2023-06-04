@@ -6,6 +6,8 @@ correct state and options.
 #include "snake.hpp"
 
 int main(int, char**) {
-  nwge::start<Init>();
+  nwge::start<Init>({
+    .appName = "Snake"
+  });
   return 0;
 }

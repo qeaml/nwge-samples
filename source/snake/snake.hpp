@@ -19,6 +19,8 @@ struct Commons {
   // bundle)
   nwge::data::PackRef pack{"snake"};
 
+  nwge::data::Store store{};
+
   // aspect ratio object to ensure nothing is stretched out in weird ways
   const nwge::render::AspectRatio &ar =
     nwge::render::keepAspectRatio(1, 1);
@@ -97,6 +99,7 @@ private:
 
   // player's score
   u32 mScore = 0;
+  i64 mHighscore = 0;
   glm::ivec2 mSnakePos, // position of the snake's head
              mFoodPos;  // position of the food
   // direction of snake movement
@@ -116,10 +119,12 @@ private:
   // determines if there is a snake tail bit at the provided direction relative
   // to the snake's head
   bool lastBitAt(Dir dir);
+  void die();
   // reset all the game variables
   void reset();
   // generate a new food position
   void putFood();
+  void loadHighscore();
 
 public:
   Ingame();

@@ -95,7 +95,7 @@ void Title::render() {
 
   // logo
   render::color();
-  mLogo.put(ar.rect({{BG_X, LOGO_Y, 0.1}, {BG_X, LOGO_H}}));
+  mLogo.put(ar.rect({{BG_X, LOGO_Y, 0.1}, {BG_W, LOGO_H}}));
 
   // background of the selected option
   render::color({0, 1, 0});

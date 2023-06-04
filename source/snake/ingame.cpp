@@ -17,6 +17,18 @@ bool Ingame::init() {
   return true;
 }
 
+void Ingame::loadHighscore() {
+  if(!gC.store.exists("highscore")) {
+    mHighscore = -1;
+    return;
+  }
+
+  auto rw = gC.store.open("highscore");
+  u32 score;
+  rw.read(&score, sizeof(score), 1);
+  mHighscore = score;
+}
+
 void Ingame::reset() {
   // re-seed the rng
   srand(time(nullptr));
@@ -24,6 +36,8 @@ void Ingame::reset() {
   mAlive = true;
   // reset the score
   mScore = 0;
+  // load high score
+  loadHighscore();
   // and the movement timer
   mMoveTimer = 0.0f;
   // remove the snake's tail
@@ -119,6 +133,18 @@ void Ingame::putFood() {
   }
 }
 
+using namespace std::string_literals;
+
+void Ingame::die() {
+  mAlive = false;
+
+  if(mScore < mHighscore)
+    return;
+
+  auto rw = gC.store.create("highscore");
+  rw.write(&mScore, sizeof(mScore), 1);
+}
+
 bool Ingame::tick(float delta) {
   // don't do anything when dead
   if(!mAlive)
@@ -156,14 +182,14 @@ bool Ingame::tick(float delta) {
   // if the next position is out of bounds, die
   if(nextSnakePos.x < 0 || nextSnakePos.x >= cBoardW
   ||(nextSnakePos.y < 0 || nextSnakePos.y >= cBoardH)) {
-    mAlive = false;
+    die();
     return true;
   }
 
   // if the next position is on a tail bit, die
   for(const auto &bit: mSnakeBits)
     if(nextSnakePos == bit) {
-      mAlive = false;
+      die();
       return true;
     }
 
@@ -236,15 +262,28 @@ void Ingame::render() {
   if(!mAlive) {
     // notify user of game over
     gC.fonts.ui.put("Game Over!", ar.pos({0.1, 0.1}));
-    gC.fonts.ui.put("Score:", ar.pos({0.1, 0.2}));
 
+    gC.fonts.ui.put("Score:", ar.pos({0.1, 0.2}));
     render::color({0, 1, 0});
-    gC.fonts.num.put(score, ar.pos({0.2, 0.2}));
+    gC.fonts.num.put(score, ar.pos({0.4, 0.2}));
+
+    render::color();
+    if(mHighscore > 0) {
+      char highscore[100];
+      snprintf(highscore, sizeof(highscore), "%lld", mHighscore);
+      gC.fonts.ui.put("Highscore:", ar.pos({0.1, 0.25}));
+      render::color({0, 1, 0});
+      gC.fonts.num.put(highscore, ar.pos({0.4, 0.25}));
+    } else {
+      gC.fonts.ui.put("NEW Highscore:", ar.pos({0.1, 0.25}));
+      render::color({0, 1, 0});
+      gC.fonts.num.put(score, ar.pos({0.4, 0.25}));
+    }
 
     // the hints
     render::color();
-    gC.fonts.ui.put("Press ESCAPE to return to main menu.", ar.pos({0.1, 0.3}));
-    gC.fonts.ui.put("Press SPACE to try again.", ar.pos({0.1, 0.35}));
+    gC.fonts.ui.put("Press ESCAPE to return to main menu.", ar.pos({0.1, 0.4}));
+    gC.fonts.ui.put("Press SPACE to try again.", ar.pos({0.1, 0.45}));
   } else {
     // show score at top of screen
     gC.fonts.ui.put("Score:", ar.pos({0.02, 0.01}));
