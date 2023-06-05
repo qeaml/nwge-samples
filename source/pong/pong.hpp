@@ -27,24 +27,29 @@ private:
   int mPlayerMvm[2];
   unsigned mScore[2];
 
+  float mSlowTimer = 0.0f;
+
   bool mPlayerTwoWins = false;
   bool mHardMode = false;
 
-  const nwge::render::AspectRatio &mAR = nwge::render::keepAspectRatio(1, 1);
+  const nwge::render::AspectRatio &mAR = nwge::render::keepAspectRatio(16, 9);
   constexpr static float
     cPaddleXL = 0.07,
     cPaddleXR = 0.9,
     cPaddleWidth = 0.03,
-    cPaddleHeight = 0.35,
+    cPaddleHeight = 0.25,
     cPaddleLL = cPaddleXL,
     cPaddleLR = cPaddleXL + cPaddleWidth,
     cPaddleRL = cPaddleXR,
     cPaddleRR = cPaddleXR + cPaddleWidth,
-    cBallSz = 0.01,
+    cBallWidth = 0.01 * (9.f/16.f),
+    cBallHeight = 0.01,
     cPaddleFastSpd = 0.6,
     cPaddleSlowSpd = 0.5,
     cBallFastSpd = 0.6,
-    cBallSlowSpd = 0.5;
+    cBallSlowSpd = 0.45;
+
+  constexpr static int cWinScore = 8;
 
   constexpr static glm::vec3
     cPlayerColorL = {.7f, .5f, .3f},

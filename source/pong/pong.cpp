@@ -56,9 +56,7 @@ bool Game::tick(float delta) {
 }
 
 void Game::render() {
-  render::clear({.1, .1, .1});
-  render::color({.2, .2, .2});
-  render::rect(mAR.rect({{0, 0, 0}, {1, 1}}));
+  render::clear({.2, .2, .2});
   if(mBegun && mActive)
     return renderGame();
   else if(mBegun)
@@ -77,6 +75,7 @@ void Game::reset() {
   mPlayerPos[0] = mPlayerPos[1] = 0.5;
   mPlayerMvm[0] = mPlayerMvm[1] = 0;
   mScore[0] = mScore[1] = 0;
+  mSlowTimer = !mHardMode;
 }
 
 void Game::renderPaddles() {
@@ -133,7 +132,7 @@ void Game::renderTitle() {
 
   mFont.put("Press SPACE to begin.", mAR.pos({0.05, 0.2}));
 
-  mFont.put("Powered by nwge!", mAR.pos({0.05, 0.9}));
+  mFont.put("v1.1", mAR.pos({0.05, 0.9}));
 }
 
 bool Game::onGame(Event &evt) {
@@ -192,43 +191,49 @@ bool Game::tickGame(float delta) {
     1 - cPaddleHeight/2);
 
   float ballSpd = mHardMode ? cBallFastSpd : cBallSlowSpd;
+  ballSpd -= mSlowTimer * ballSpd;
+  mSlowTimer = SDL_max(0, mSlowTimer-delta);
   glm::vec2 nextBallPos = mBallPos + mBallDir*delta*ballSpd;
 
-  float leftBallX = nextBallPos.x - cBallSz/2,
-        rightBallX = nextBallPos.x + cBallSz/2,
-        topBallY = nextBallPos.y - cBallSz/2,
-        btmBallY = nextBallPos.y + cBallSz/2;
+  float leftBallX = nextBallPos.x - cBallWidth/2,
+        rightBallX = nextBallPos.x + cBallWidth/2,
+        topBallY = nextBallPos.y - cBallHeight/2,
+        btmBallY = nextBallPos.y + cBallHeight/2;
 
   if(leftBallX < 0) {
-    mPlayerTwoWins = true;
-    mActive = false;
-    return true;
+    mScore[1]++;
+    nextBallPos = {0.5, 0.5};
+    mSlowTimer = !mHardMode;
+    mBallDir *= -1;
   }
-
-  if(rightBallX > 1) {
-    mPlayerTwoWins = false;
-    mActive = false;
-    return true;
+  else if(rightBallX > 1) {
+    mScore[0]++;
+    nextBallPos = {0.5, 0.5};
+    mSlowTimer = !mHardMode;
+    mBallDir *= -1;
   }
-
-  if(topBallY < 0 || btmBallY > 1) {
+  else if(topBallY < 0 || btmBallY > 1) {
     mBallDir.y *= -1;
   }
-
-  if(leftBallX < cPaddleLR && rightBallX > cPaddleLL
+  else if(leftBallX < cPaddleLR && rightBallX > cPaddleLL
   &&(topBallY < mPlayerPos[0]+cPaddleHeight/2)
   &&(btmBallY > mPlayerPos[0]-cPaddleHeight/2)) {
     mBallDir.x = -mBallDir.x;
-    nextBallPos.x = cPaddleXL + cBallSz + cPaddleWidth;
-    mScore[0]++;
+    nextBallPos.x = cPaddleXL + cBallWidth + cPaddleWidth;
   }
-
-  if(rightBallX > cPaddleRL && leftBallX < cPaddleRR
+  else if(rightBallX > cPaddleRL && leftBallX < cPaddleRR
   &&(topBallY < mPlayerPos[1]+cPaddleHeight/2)
   &&(btmBallY > mPlayerPos[1]-cPaddleHeight/2)) {
     mBallDir.x = -mBallDir.x;
-    nextBallPos.x = cPaddleXR - cBallSz;
-    mScore[1]++;
+    nextBallPos.x = cPaddleXR - cBallWidth;
+  }
+
+  if(mScore[0] >= cWinScore) {
+    mActive = false;
+    mPlayerTwoWins = false;
+  } else if(mScore[1] >= cWinScore) {
+    mActive = false;
+    mPlayerTwoWins = true;
   }
 
   mBallPos = nextBallPos;
@@ -240,7 +245,7 @@ void Game::renderGame() {
   renderPaddles();
 
   render::color();
-  render::rect(mAR.rect({{mBallPos-cBallSz/2, 0}, {cBallSz, cBallSz}}));
+  render::rect(mAR.rect({{mBallPos-cBallWidth/2, 0}, {cBallWidth, cBallHeight}}));
 
   char score[20];
   snprintf(score, sizeof(score), "%u", mScore[0]);
