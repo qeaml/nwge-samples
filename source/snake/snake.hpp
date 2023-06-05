@@ -17,7 +17,7 @@ struct Commons {
   // version of bundles, kept to differentiate between the bundle (which is the
   // bundle file itself) and the pack (which is just a named reference to a
   // bundle)
-  nwge::data::PackRef pack{"snake"};
+  nwge::data::PackRef pack{"common"};
 
   nwge::data::Store store{};
 
@@ -57,6 +57,7 @@ public:
 class Title: public nwge::State {
 private:
   u32 mSelection = 0;
+  nwge::data::PackRef mPack{"snake"};
   // A texture owned by this state. It is loaded in State::preload() and is
   // unloaded by the destructor.
   nwge::render::Texture mLogo;

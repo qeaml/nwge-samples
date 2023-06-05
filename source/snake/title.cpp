@@ -18,7 +18,7 @@ bool Title::preload() {
   have a default constructor for an invalid object. This will initialize the
   texture to a new object and upload the texture data to it.
   */
-  gC.pack.nqTexture("logo.png", mLogo);
+  mPack.nqTexture("logo.png", mLogo);
   return true;
 }
 

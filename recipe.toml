@@ -38,3 +38,16 @@ libs = [
 link = [
   "/subsystem:windows"
 ]
+
+[pong]
+exe = "nwgepong"
+libs = [
+  "nwge",
+  "SDL2",
+  "SDL2main",
+  "SDL2_image",
+  "Shell32"
+]
+link = [
+  "/subsystem:windows"
+]
