@@ -5,3 +5,6 @@
 
 # python ugh
 __pycache__
+
+# release package
+pkg
