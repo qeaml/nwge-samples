@@ -136,23 +136,28 @@ void Paint::render() {
 
   SDL_RenderPresent(mDrawingRndr);
   mDrawingTex.replace(mDrawing);
-  mDrawingTex.put({{0.0f, 0.0f, 0.0f}, mDrawingRenderSz});
+  render::rect({{0.0f, 0.0f, 0.0f}, mDrawingRenderSz}, mDrawingTex);
 
-  mToolbarTex.put(
+  render::rect(
     {{1.0f-mToolbarBtnRndSz.x, mToolbarBtnRndSz.y*0, 0.1f}, mToolbarBtnRndSz},
+    mToolbarTex,
     {{0.0f, (mTool==Tool::Pencil) * mToolbarBtnTexCoord.y}, mToolbarBtnTexCoord});
-  mToolbarTex.put(
+  render::rect(
     {{1.0f-mToolbarBtnRndSz.x, mToolbarBtnRndSz.y*1, 0.1f}, mToolbarBtnRndSz},
+    mToolbarTex,
     {{0.0f, (mTool==Tool::Eraser) * mToolbarBtnTexCoord.y}, mToolbarBtnTexCoord});
 
-  mToolbarTex.put(
+  render::rect(
     {{1.0f-mToolbarBtnRndSz.x, mToolbarBtnRndSz.y*0, 0.1f}, mToolbarBtnRndSz},
+    mToolbarTex,
     {{mToolbarBtnTexCoord.x, mToolbarBtnTexCoord.y*0}, mToolbarBtnTexCoord});
-  mToolbarTex.put(
+  render::rect(
     {{1.0f-mToolbarBtnRndSz.x, mToolbarBtnRndSz.y*1, 0.1f}, mToolbarBtnRndSz},
+    mToolbarTex,
     {{mToolbarBtnTexCoord.x, mToolbarBtnTexCoord.y*1}, mToolbarBtnTexCoord});
 
-  mToolbarTex.put(
+  render::rect(
     {{mCursorPos - glm::vec2{0, mToolbarBtnRndSz.y}, 0.5f}, mToolbarBtnRndSz},
+    mToolbarTex,
     {{mToolbarBtnTexCoord.x, mToolbarBtnTexCoord.y*int(mTool)}, mToolbarBtnTexCoord});
 }

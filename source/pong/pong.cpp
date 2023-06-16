@@ -128,7 +128,7 @@ void Game::renderTitle() {
   render::rect(mAR.rect({{0, 0, 0}, {1, 0.3}}));
 
   render::color();
-  mLogo.put(mAR.rect({{0.4, 0.05, 0}, {0.2, 0.1}}));
+  render::rect(mAR.rect({{0.4, 0.05, 0}, {0.2, 0.1}}), mLogo);
 
   mFont.put("Press SPACE to begin.", mAR.pos({0.05, 0.2}));
 

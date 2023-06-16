@@ -51,3 +51,16 @@ libs = [
 link = [
   "/subsystem:windows"
 ]
+
+[breakout]
+exe = "nwgebreakout"
+libs = [
+  "nwge",
+  "SDL2",
+  "SDL2main",
+  "SDL2_image",
+  "Shell32"
+]
+link = [
+  "/subsystem:windows"
+]
