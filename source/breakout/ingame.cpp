@@ -27,6 +27,7 @@ void Ingame::resetBall() {
   mBallVel = { rand() <= 0 ? -1 : 1, -1 };
   mBall = {cBallStartX, cBallStartY};
   mPlayerX = cPlayerStartX;
+  mSlowBall = 1.0f;
 }
 
 bool Ingame::on(Event &evt) {
@@ -81,10 +82,11 @@ bool Ingame::tick(float delta) {
   if(mGameover)
     return true;
 
-  mPlayerX += mPlayerVel * cPlayerSpd * delta;
+  mPlayerX += mPlayerVel * cPlayerSpd * delta ;
   mPlayerX = SDL_clamp(mPlayerX, cPlayerMinX, cPlayerMaxX);
 
-  glm::vec2 nextBall = mBall + mBallVel * cBallSpd * delta;
+  glm::vec2 nextBall = mBall + (mBallVel * cBallSpd * delta * (1.0f - mSlowBall));
+  mSlowBall = SDL_max(0, mSlowBall-delta);
 
   bool move = true;
   if(nextBall.x < 0) {

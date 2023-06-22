@@ -92,6 +92,7 @@ private:
   unsigned mScore = 0,
            mBounces = 0,
            mLives = 3;
+  float mSlowBall = 1.0f;
 
   // each block is just a single bit
   u8 mBlocks[cBlockCntX/8*cBlockCntY];
@@ -101,7 +102,6 @@ private:
   glm::vec2 mBall = {cBallStartX, cBallStartY};
   glm::vec2 mBallVel = {0, 0};
 
-  bool mFUCKJ = false;
 
   void resetBall();
   void reset();
