@@ -30,7 +30,7 @@ bool Game::init() {
   reset();
   console::registerCommand("g.hardmode", [this](auto&){
     mHardMode = !mHardMode;
-    console::putLine("hard mode: "s + (mHardMode ? "on" : "off"));
+    console::print("hard mode: %s", mHardMode ? "on" : "off");
     return true;
   });
   return true;

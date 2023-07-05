@@ -5,7 +5,7 @@ using namespace nwge;
 Commons gC;
 
 void preloadCommons() {
-  c::eprint("Loading common resources...\n");
+  c::eprint("Loading common resources...");
 
   data::addDataDir("data");
   gC.pack
@@ -13,4 +13,3 @@ void preloadCommons() {
     .nqFont("code", 16, gC.fonts.code)
     .nqFont("num", 32, gC.fonts.num);
 }
-
