@@ -59,7 +59,7 @@ bool Credits::on(Event &evt) {
 bool Credits::tick(float delta) {
   // Scroll the text. The boundaries of 0.0-1.6 are chosed arbitraily based on
   // the font size.
-  mScroll = SDL_clamp(mScroll + delta*mScrollDir*SCROLL_SPEED, 0.0, 1.6);
+  mScroll = SDL_clamp(mScroll + delta*mScrollDir*SCROLL_SPEED, 0.0, 3);
   return true;
 }
 
@@ -68,7 +68,7 @@ void Credits::render() {
 
   // put the license text on screen, scrolled
   render::color();
-  gC.fonts.code.put(mCreditsCSTR, {0.02, -mScroll});
+  gC.fonts.code.put(mCreditsCSTR, {0.02, -mScroll}, 0.04);
 
   // put a background behind the hint
   render::color({0, 0, 0});
@@ -76,7 +76,7 @@ void Credits::render() {
 
   // the hint
   render::color();
-  gC.fonts.ui.put("Press ESCAPE to return.", {0.01, 0.94});
+  gC.fonts.ui.put("Press ESCAPE to return.", {0.01, 0.96}, 0.03);
 }
 
 Credits::~Credits() {}

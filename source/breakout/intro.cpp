@@ -11,7 +11,7 @@ Intro::~Intro() {}
 
 bool Intro::preload() {
   data::addDataDir("data");
-  gShared.commonPack.nqFont("ui", 23, gShared.font);
+  gShared.commonPack.nqFont("ui", 100, gShared.font);
   gShared.ownPack.nqTexture("logos.png", mLogos);
   return true;
 }

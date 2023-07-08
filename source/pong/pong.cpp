@@ -19,7 +19,7 @@ Game::~Game() {}
 
 bool Game::preload() {
   data::addDataDir("data");
-  mCommonPack.nqFont("ui", 32, mFont);
+  mCommonPack.nqFont("ui", 100, mFont);
   mGamePack.nqTexture("logo.png", mLogo);
   return true;
 }
@@ -130,9 +130,9 @@ void Game::renderTitle() {
   render::color();
   render::rect(mAR.rect({{0.4, 0.05, 0}, {0.2, 0.1}}), mLogo);
 
-  mFont.put("Press SPACE to begin.", mAR.pos({0.05, 0.2}));
+  mFont.put("Press SPACE to begin.", mAR.pos({0.05, 0.2}), 0.05);
 
-  mFont.put("v1.1", mAR.pos({0.05, 0.9}));
+  mFont.put("v1.1", mAR.pos({0.05, 0.9}), 0.05);
 }
 
 bool Game::onGame(Event &evt) {
@@ -249,10 +249,10 @@ void Game::renderGame() {
 
   char score[20];
   snprintf(score, sizeof(score), "%u", mScore[0]);
-  mFont.put(score, mAR.pos({cPaddleLL, 0.05}));
+  mFont.put(score, mAR.pos({cPaddleLL, 0.05}), 0.05);
 
   snprintf(score, sizeof(score), "%u", mScore[1]);
-  mFont.put(score, mAR.pos({cPaddleRL, 0.05}));
+  mFont.put(score, mAR.pos({cPaddleRL, 0.05}), 0.05);
 }
 
 bool Game::onSummary(Event &evt) {
@@ -283,7 +283,7 @@ void Game::renderSummary() {
   render::color();
   mFont.put(
     mPlayerTwoWins ? "Player 2 wins!" : "Player 1 wins!",
-    mAR.pos({0.05, 0.05})
+    mAR.pos({0.05, 0.05}), 0.09
   );
-  mFont.put("Press SPACE to reset.", mAR.pos({0.05, 0.15}));
+  mFont.put("Press SPACE to reset.", mAR.pos({0.05, 0.15}), 0.05);
 }

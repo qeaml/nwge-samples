@@ -84,6 +84,7 @@ bool Title::tick(float) {
 #define OPT_H 0.05
 #define TEXT_OFF_X 0.02
 #define TEXT_OFF_Y 0.01
+#define TEXT_H (OPT_H)
 
 void Title::render() {
   render::clear(); // preemptively clear the screen
@@ -106,13 +107,13 @@ void Title::render() {
   render::color();
   for(u32 i = 0; i < gOptCount; i++) {
     gC.fonts.ui.put(gOptNames[i],
-      ar.pos({BG_X+TEXT_OFF_X, OPT_Y + i*OPT_H + TEXT_OFF_Y}));
+      ar.pos({BG_X+TEXT_OFF_X, OPT_Y + i*OPT_H + TEXT_OFF_Y}), TEXT_H);
   }
 
   // little disclaimer at bottom left
   render::color();
   gC.fonts.ui.put("Powered by nwge!",
-    ar.pos({TEXT_OFF_X, 1-OPT_H-TEXT_OFF_Y}));
+    ar.pos({TEXT_OFF_X, 1-OPT_H-TEXT_OFF_Y}), TEXT_H);
 }
 
 Title::~Title() {}

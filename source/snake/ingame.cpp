@@ -261,34 +261,34 @@ void Ingame::render() {
   // on game over
   if(!mAlive) {
     // notify user of game over
-    gC.fonts.ui.put("Game Over!", ar.pos({0.1, 0.1}));
+    gC.fonts.ui.put("Game Over!", ar.pos({0.1, 0.1}), 0.09);
 
-    gC.fonts.ui.put("Score:", ar.pos({0.1, 0.2}));
+    gC.fonts.ui.put("Score:", ar.pos({0.1, 0.2}), 0.04);
     render::color({0, 1, 0});
-    gC.fonts.num.put(score, ar.pos({0.4, 0.2}));
+    gC.fonts.num.put(score, ar.pos({0.4, 0.2}), 0.04);
 
     render::color();
     if(mHighscore > 0) {
       char highscore[100];
       snprintf(highscore, sizeof(highscore), "%lld", mHighscore);
-      gC.fonts.ui.put("Highscore:", ar.pos({0.1, 0.25}));
+      gC.fonts.ui.put("Highscore:", ar.pos({0.1, 0.25}), 0.04);
       render::color({0, 1, 0});
-      gC.fonts.num.put(highscore, ar.pos({0.4, 0.25}));
+      gC.fonts.num.put(highscore, ar.pos({0.4, 0.25}), 0.04);
     } else {
-      gC.fonts.ui.put("NEW Highscore:", ar.pos({0.1, 0.25}));
+      gC.fonts.ui.put("NEW Highscore:", ar.pos({0.1, 0.25}), 0.04);
       render::color({0, 1, 0});
-      gC.fonts.num.put(score, ar.pos({0.4, 0.25}));
+      gC.fonts.num.put(score, ar.pos({0.4, 0.25}), 0.04);
     }
 
     // the hints
     render::color();
-    gC.fonts.ui.put("Press ESCAPE to return to main menu.", ar.pos({0.1, 0.4}));
-    gC.fonts.ui.put("Press SPACE to try again.", ar.pos({0.1, 0.45}));
+    gC.fonts.ui.put("Press ESCAPE to return to main menu.", ar.pos({0.1, 0.4}), 0.04);
+    gC.fonts.ui.put("Press SPACE to try again.", ar.pos({0.1, 0.45}), 0.04);
   } else {
     // show score at top of screen
-    gC.fonts.ui.put("Score:", ar.pos({0.02, 0.01}));
+    gC.fonts.ui.put("Score:", ar.pos({0.02, 0.01}), 0.04);
     render::color({0, 1, 0});
-    gC.fonts.num.put(score, ar.pos({0.2, 0.01}));
+    gC.fonts.num.put(score, ar.pos({0.2, 0.01}), 0.04);
   }
 }
 

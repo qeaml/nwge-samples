@@ -179,9 +179,9 @@ void Ingame::render() {
 
   char buf[1024];
   snprintf(buf, sizeof(buf), "Lives: %u", mLives);
-  gShared.font.put(buf, gShared.ar.pos({0.21, 0.01}));
+  gShared.font.put(buf, gShared.ar.pos({0.21, 0.01}), 0.04);
   snprintf(buf, sizeof(buf), "Score: %06u", mScore);
-  gShared.font.put(buf, gShared.ar.pos({0.01, 0.01}));
+  gShared.font.put(buf, gShared.ar.pos({0.01, 0.01}), 0.04);
 
   render::color();
   if(mPaused)
@@ -193,10 +193,10 @@ void Ingame::render() {
       {0, 0.4, 0}, {1, 0.2}
     }));
     render::color();
-    gShared.font.put("Game Over!", gShared.ar.pos({0.01, 0.41}));
-    gShared.font.put(buf, gShared.ar.pos({0.01, 0.46}));
+    gShared.font.put("Game Over!", gShared.ar.pos({0.01, 0.41}), 0.05);
+    gShared.font.put(buf, gShared.ar.pos({0.01, 0.46}), 0.05);
     gShared.font.put("Press ESCAPE to quit, or SPACE to retry.",
-      gShared.ar.pos({0.01, 0.55}));
+      gShared.ar.pos({0.01, 0.55}), 0.04);
 
     return;
   }
@@ -314,16 +314,16 @@ void Ingame::renderPause() {
   render::color();
   gShared.font.put("PAUSED", gShared.ar.pos(
     {cMenuX, cMenuY-2*cMenuPad-cMenuBtnH}
-  ));
+  ), cMenuBtnH);
   gShared.font.put("Resume", gShared.ar.pos(
     {cMenuX+cMenuPad, cMenuY+cMenuPad}
-  ));
+  ), cMenuBtnH);
   gShared.font.put("Main Menu", gShared.ar.pos(
     {cMenuX+cMenuPad, cMenuY+cMenuPad+cMenuBtnH}
-  ));
+  ), cMenuBtnH);
   gShared.font.put("Quit", gShared.ar.pos(
     {cMenuX+cMenuPad, cMenuY+cMenuPad+2*cMenuBtnH}
-  ));
+  ), cMenuBtnH);
 }
 
 bool Ingame::preload() {

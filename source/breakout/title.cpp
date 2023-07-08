@@ -86,10 +86,10 @@ void Title::render() {
   render::color();
   gShared.font.put("Start", gShared.ar.pos(
     {cMenuX+cMenuPad, cMenuY+cMenuPad}
-  ));
+  ), cMenuBtnH);
   gShared.font.put("Quit", gShared.ar.pos(
     {cMenuX+cMenuPad, cMenuY+cMenuPad+cMenuBtnH}
-  ));
+  ), cMenuBtnH);
 }
 
 bool Title::handleClick() {

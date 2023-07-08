@@ -9,7 +9,7 @@ void preloadCommons() {
 
   data::addDataDir("data");
   gC.pack
-    .nqFont("ui", 32, gC.fonts.ui)
-    .nqFont("code", 16, gC.fonts.code)
-    .nqFont("num", 32, gC.fonts.num);
+    .nqFont("ui", 100, gC.fonts.ui)
+    .nqFont("code", 100, gC.fonts.code)
+    .nqFont("num", 100, gC.fonts.num);
 }
