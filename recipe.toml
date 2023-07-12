@@ -1,9 +1,7 @@
 [build]
 cc = "clang"
 src = "source"
-incl = [
-  "include"
-]
+incl = [ "include" ]
 out = "target"
 obj = "target/build"
 
@@ -15,52 +13,17 @@ plug = "data_plugin"
 
 [paint]
 exe = "nwgepaint"
-libs = [
-  "nwge",
-  "SDL2",
-  "SDL2main",
-  "SDL2_image",
-  "Shell32"
-]
-link = [
-  "/subsystem:windows"
-]
+link = [ "/subsystem:windows" ]
+libs = [ "SDL2_image" ]
 
 [snake]
 exe = "nwgesnake"
-libs = [
-  "nwge",
-  "SDL2",
-  "SDL2main",
-  "SDL2_image",
-  "Shell32"
-]
-link = [
-  "/subsystem:windows"
-]
+link = [ "/subsystem:windows" ]
 
 [pong]
 exe = "nwgepong"
-libs = [
-  "nwge",
-  "SDL2",
-  "SDL2main",
-  "SDL2_image",
-  "Shell32"
-]
-link = [
-  "/subsystem:windows"
-]
+link = [ "/subsystem:windows" ]
 
 [breakout]
 exe = "nwgebreakout"
-libs = [
-  "nwge",
-  "SDL2",
-  "SDL2main",
-  "SDL2_image",
-  "Shell32"
-]
-link = [
-  "/subsystem:windows"
-]
+link = [ "/subsystem:windows" ]
